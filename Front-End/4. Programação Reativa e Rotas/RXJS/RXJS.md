@@ -32,7 +32,7 @@ Modificam os valores emitidos pelo Observable.
 | Operador | Descrição | Exemplo |
 |----------|-----------|---------|
 | `map` | Transforma cada valor emitido | `map(x => x * 2)` |
-| `mergeMap` | Transforma e achata Observables aninhados | `mergeMap(x => http.get(url))` |
+| `mergeMap` | Mescla todos os Observables internos em um único fluxo de saída | `mergeMap(x => http.get(url))` |
 | `switchMap` | Cancela Observable anterior ao receber novo valor | `switchMap(term => search(term))` |
 | `concatMap` | Processa Observables em sequência | `concatMap(x => saveData(x))` |
 
