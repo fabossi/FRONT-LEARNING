@@ -110,6 +110,6 @@ Este repositório é um acervo abrangente de conhecimento técnico, organizado e
 
 ---
 
-### 💖 Feito com paixão pela equipe BrainRocket
+### 💖 Feito com carinho para todos os devs
 
 *Última atualização: Novembro 2024*
