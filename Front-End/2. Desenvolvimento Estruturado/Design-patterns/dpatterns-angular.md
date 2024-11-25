@@ -1,192 +1,134 @@
-# Design Patterns no Angular
-> Guia completo de padrões de projeto aplicados ao Angular
+# 🏗️ Design Patterns no Angular
 
-## Sumário
-- [Padrões Estruturais](#padrões-estruturais)
-- [Padrões de Serviço](#padrões-de-serviço)
-- [Padrões de Componente](#padrões-de-componente)
-- [Padrões de Estado](#padrões-de-estado)
-- [Boas Práticas](#boas-práticas)
+> Arquitetura Inteligente, Código Elegante 🚀
 
-## Padrões Estruturais
+## 🌟 Introdução
 
-### 1. Module Pattern
-O Angular já utiliza módulos nativamente através do `NgModule`.
+Design Patterns são soluções comprovadas para problemas recorrentes no desenvolvimento de software. No Angular, esses padrões nos ajudam a criar aplicações:
+- 🧩 Modulares
+- 🔒 Escaláveis
+- 🚀 Performáticas
+- 🤝 Fáceis de manter
+
+## 🗂️ Categorias de Design Patterns
+
+### 1. 🏗️ Padrões Estruturais
+
+```mermaid
+graph TD
+    A[Padrões Estruturais] --> B[Module Pattern]
+    A --> C[Feature Modules]
+    A --> D[Composition]
+    
+    B --> E[Organização de Código]
+    C --> F[Modularização]
+    D --> G[Reutilização de Componentes]
+```
+
+#### Module Pattern
+- 🔑 Organização nativa do Angular
+- 📦 Agrupamento de funcionalidades relacionadas
+- 🧩 Controle de escopo e dependências
 
 ```typescript
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule
-  ],
-  providers: [
-    AuthService
-  ],
-  bootstrap: [AppComponent]
+  declarations: [ComponentesRelacionados],
+  imports: [DependênciasNecessárias],
+  providers: [ServiçosEspecíficos]
 })
-export class AppModule { }
+export class MeuModuloEspecifico { }
 ```
 
-### 2. Feature Modules
-Organização de módulos por funcionalidade.
+### 2. 🤝 Padrões de Serviço
 
-```typescript
-// user.module.ts
-@NgModule({
-  declarations: [
-    UserListComponent,
-    UserDetailComponent,
-    UserFormComponent
-  ],
-  imports: [
-    CommonModule,
-    UserRoutingModule
-  ],
-  providers: [
-    UserService
-  ]
-})
-export class UserModule { }
+```mermaid
+graph TD
+    A[Padrões de Serviço] --> B[Singleton]
+    A --> C[Repository]
+    A --> D[Facade]
+    
+    B --> E[Instância Única]
+    C --> F[Abstração de Dados]
+    D --> G[Simplificação de Interfaces]
 ```
 
-## Padrões de Serviço
-
-### 1. Singleton Service
-Serviços são singletons por padrão no Angular quando providenciados no root.
+#### Singleton Service
+- 🔒 Instância única globalmente
+- 💾 Gerenciamento de estado centralizado
+- 🌐 Acessível em toda aplicação
 
 ```typescript
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser: User | null = null;
-
+  
   login(credentials: Credentials): Observable<User> {
-    return this.http.post<User>('/api/login', credentials)
-      .pipe(
-        tap(user => this.currentUser = user)
-      );
-  }
-
-  getCurrentUser(): User | null {
-    return this.currentUser;
+    return this.http.post<User>('/login', credentials)
+      .pipe(tap(user => this.currentUser = user));
   }
 }
 ```
 
-### 2. Repository Pattern
-Abstrai a lógica de acesso a dados.
+### 3. 🖥️ Padrões de Componente
 
-```typescript
-@Injectable({
-  providedIn: 'root'
-})
-export class UserRepository {
-  private apiUrl = 'api/users';
-
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
-  }
-
-  getById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`);
-  }
-
-  create(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
-  }
-}
+```mermaid
+graph TD
+    A[Padrões de Componente] --> B[Container/Presenter]
+    A --> C[Observer]
+    A --> D[Composition]
+    
+    B --> E[Separação de Responsabilidades]
+    C --> F[Gerenciamento Reativo]
+    D --> G[Componentes Reutilizáveis]
 ```
 
-## Padrões de Componente
-
-### 1. Container/Presenter Pattern (Smart/Dumb Components)
-Separa componentes com lógica de negócios dos componentes de apresentação.
+#### Container/Presenter Pattern
+- 🧠 Componentes inteligentes (Container)
+- 🎨 Componentes de apresentação (Presenter)
+- 🔀 Separação clara de responsabilidades
 
 ```typescript
-// container component (smart)
+// Container (Smart Component)
 @Component({
-  selector: 'app-user-list-container',
-  template: `
-    <app-user-list
-      [users]="users$ | async"
-      (userSelected)="onUserSelected($event)">
-    </app-user-list>
-  `
+  template: `<app-user-list [users]="users$ | async"></app-user-list>`
 })
 export class UserListContainerComponent {
   users$ = this.userService.getUsers();
-
-  constructor(private userService: UserService) {}
-
-  onUserSelected(user: User): void {
-    // lógica de negócios aqui
-  }
 }
 
-// presenter component (dumb)
+// Presenter (Dumb Component)
 @Component({
-  selector: 'app-user-list',
   template: `
     <div *ngFor="let user of users">
-      <div (click)="select(user)">
-        {{ user.name }}
-      </div>
+      {{ user.name }}
     </div>
   `
 })
 export class UserListComponent {
   @Input() users: User[] = [];
-  @Output() userSelected = new EventEmitter<User>();
-
-  select(user: User): void {
-    this.userSelected.emit(user);
-  }
 }
 ```
 
-### 2. Observer Pattern (com RxJS)
-Implementação de observables para gerenciar fluxos de dados.
+### 4. 🔄 Padrões de Estado
 
-```typescript
-@Component({
-  selector: 'app-search',
-  template: `
-    <input [formControl]="searchControl">
-    <div *ngFor="let result of searchResults$ | async">
-      {{ result.name }}
-    </div>
-  `
-})
-export class SearchComponent implements OnInit {
-  searchControl = new FormControl('');
-  searchResults$: Observable<SearchResult[]>;
-
-  constructor(private searchService: SearchService) {
-    this.searchResults$ = this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(term => this.searchService.search(term))
-    );
-  }
-}
+```mermaid
+graph TD
+    A[Padrões de Estado] --> B[State Management]
+    A --> C[Facade]
+    A --> D[Store]
+    
+    B --> E[Gerenciamento Centralizado]
+    C --> F[Simplificação de Complexidade]
+    D --> G[Fluxo de Dados Previsível]
 ```
 
-## Padrões de Estado
-
-### 1. State Management Pattern
-Usando services para gerenciar estado.
+#### State Management Pattern
+- 📊 Gerenciamento de estado
+- 🔄 Fluxo de dados controlado
+- 🧩 Previsibilidade
 
 ```typescript
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartStore {
   private state = new BehaviorSubject<CartState>({
     items: [],
@@ -194,8 +136,6 @@ export class CartStore {
   });
 
   state$ = this.state.asObservable();
-  items$ = this.state$.pipe(map(state => state.items));
-  total$ = this.state$.pipe(map(state => state.total));
 
   addItem(item: CartItem): void {
     const currentState = this.state.getValue();
@@ -207,117 +147,27 @@ export class CartStore {
 }
 ```
 
-### 2. Facade Pattern
-Simplifica interfaces complexas.
-
-```typescript
-@Injectable({
-  providedIn: 'root'
-})
-export class UserFacade {
-  private userState = new BehaviorSubject<UserState>({
-    user: null,
-    loading: false,
-    error: null
-  });
-
-  user$ = this.userState.pipe(map(state => state.user));
-  loading$ = this.userState.pipe(map(state => state.loading));
-  error$ = this.userState.pipe(map(state => state.error));
-
-  constructor(
-    private userService: UserService,
-    private authService: AuthService
-  ) {}
-
-  loadUser(id: string): void {
-    this.userState.next({ ...this.userState.getValue(), loading: true });
-    this.userService.getUser(id).pipe(
-      tap(user => this.userState.next({
-        user,
-        loading: false,
-        error: null
-      })),
-      catchError(error => {
-        this.userState.next({
-          user: null,
-          loading: false,
-          error
-        });
-        return EMPTY;
-      })
-    ).subscribe();
-  }
-}
-```
-
-## Padrões de Forms
-
-### 1. Form Builder Pattern
-```typescript
-@Component({
-  selector: 'app-user-form',
-  template: `
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <input formControlName="name">
-      <input formControlName="email">
-      <button type="submit">Save</button>
-    </form>
-  `
-})
-export class UserFormComponent {
-  userForm = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
-  });
-
-  constructor(private fb: FormBuilder) {}
-
-  onSubmit(): void {
-    if (this.userForm.valid) {
-      console.log(this.userForm.value);
-    }
-  }
-}
-```
-
-## Boas Práticas
+## 🛡️ Boas Práticas
 
 ### 1. Dependency Injection
-O Angular usa DI nativamente.
+- 🔌 Desacoplamento de dependências
+- 🧩 Injeção automática de serviços
+- 🚀 Facilita testes e manutenção
 
-```typescript
-@Injectable({
-  providedIn: 'root'
-})
-export class ProductService {
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {}
-}
-```
+### 2. HTTP Interceptors
+- 🌐 Interceptação de requisições
+- 🔒 Segurança e transformação de requests
+- 📡 Manipulação global de chamadas HTTP
 
-### 2. Interceptors
-Pattern para interceptar requisições HTTP.
+## 🏆 Benefícios dos Design Patterns
 
-```typescript
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+- 📐 Arquitetura consistente
+- 🚀 Código mais limpo e legível
+- 🤝 Facilita colaboração
+- 💡 Soluções testadas e aprovadas
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const token = this.authService.getToken();
-    if (token) {
-      const authReq = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${token}`)
-      });
-      return next.handle(authReq);
-    }
-    return next.handle(req);
-  }
-}
-```
+## 🚦 Conclusão
+
+Design Patterns não são apenas técnicas, são **filosofias de desenvolvimento**. No Angular, eles nos ajudam a criar aplicações robustas, escaláveis e de fácil manutenção.
+
+**Lembre-se**: Padrões são guias, não correntes. Use-os com sabedoria! 🧠✨
