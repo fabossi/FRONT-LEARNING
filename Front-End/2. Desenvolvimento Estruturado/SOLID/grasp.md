@@ -7,6 +7,7 @@ GRASP (General Responsibility Assignment Software Patterns) são padrões que no
 ## 🎯 Princípios Fundamentais com Exemplos
 
 ### 1. 🕵️ Especialista na Informação (Information Expert)
+  - Atribua responsabilidades a classes que têm as informações necessárias
 
 #### Código Ruim (Violação do Princípio)
 ```typescript
@@ -49,6 +50,8 @@ class Order {
 ```
 
 ### 2. 🏗️ Criador (Creator)
+   - Defina quem deve criar novas instâncias de classes
+
 
 #### Código Ruim
 ```typescript
@@ -79,6 +82,7 @@ class Order {
 ```
 
 ### 3. 🔗 Baixo Acoplamento (Low Coupling)
+   - Minimize dependências entre componentes
 
 #### Código Ruim (Alto Acoplamento)
 ```typescript
@@ -126,6 +130,7 @@ class PaymentProcessor {
 ```
 
 ### 4. 🎯 Alta Coesão (High Cohesion)
+   - Mantenha responsabilidades fortemente relacionadas
 
 #### Código Ruim (Baixa Coesão)
 ```typescript
@@ -178,6 +183,7 @@ class UserNotification {
 ```
 
 ### 5. 🎛️ Controlador (Controller)
+   - Gerencie eventos do sistema em classes específicas
 
 #### Código Ruim
 ```typescript
@@ -217,6 +223,7 @@ class ProductView {
 ```
 
 ### 6. 🔄 Polimorfismo (Polymorphism)
+   - Use polimorfismo para lidar com variações de tipo
 
 #### Código Ruim
 ```typescript
@@ -261,6 +268,7 @@ class ReportService {
 ```
 
 ### 7. 🧩 Fabricação Pura (Pure Fabrication)
+   - Crie classes artificiais quando necessário
 
 #### Código Ruim
 ```typescript
@@ -297,6 +305,7 @@ class Order {
 ```
 
 ### 8. ↔️ Indireção (Indirection)
+   - Use intermediários para reduzir acoplamento
 
 #### Código Ruim
 ```typescript
@@ -331,7 +340,8 @@ class ProductRepository {
 ```
 
 ### 9. 🛡️ Proteção contra Variações (Protected Variations)
-
+   - Encapsule o que varia
+     
 #### Código Ruim
 ```typescript
 class PaymentProcessor {
