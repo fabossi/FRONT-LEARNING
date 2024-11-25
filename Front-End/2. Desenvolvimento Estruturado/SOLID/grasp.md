@@ -1,5 +1,3 @@
-Aqui está o README arrumado e formatado:
-
 # 🏗️ Princípios GRASP: Guia Completo de Design de Software
 
 ## 📌 Princípios GRASP
