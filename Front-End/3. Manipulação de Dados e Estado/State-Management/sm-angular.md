@@ -2,7 +2,7 @@
 
 ## 📚 Índice
 - [O que é Estado?](#-o-que-é-estado)
-- [Tipos de Gerenciamento de Estado](#-tipos-de-gerenciamento-de-estado)
+- [Tipos de Gerenciamento de Estado](#tipos-de-gerenciamento-de-estado)
 - [Soluções Disponíveis](#-soluções-disponíveis)
 - [Quando Usar Cada Solução](#-quando-usar-cada-solução)
 - [Padrões e Boas Práticas](#-padrões-e-boas-práticas)
