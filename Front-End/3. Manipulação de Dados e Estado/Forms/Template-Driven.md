@@ -7,15 +7,15 @@
 
 ## 📋 Índice
 
-- [Introdução](##introdução)
-- [Casos de Uso](#casos-de-uso)
-- [Configuração Básica](#configuração-básica)
-- [Funcionalidades Básicas](#funcionalidades-básicas)
-- [Funcionalidades Avançadas](#funcionalidades-avançadas)
-- [Validação](#validação)
-- [Boas Práticas](#boas-práticas)
-- [Exemplos Práticos](#exemplos-práticos)
-- [Troubleshooting](#troubleshooting)
+- [Introdução](#-introdução)
+- [Casos de Uso](#-casos-de-uso)
+- [Configuração Básica](#-configuração-básica)
+- [Funcionalidades Básicas](#-funcionalidades-básicas)
+- [Funcionalidades Avançadas](#-funcionalidades-avançadas)
+- [Validação](#-validação)
+- [Boas Práticas](#-boas-práticas)
+- [Exemplos Práticos](#-exemplos-práticos)
+- [Troubleshooting](#-troubleshooting)
 
 ## 🎯 Introdução
 
