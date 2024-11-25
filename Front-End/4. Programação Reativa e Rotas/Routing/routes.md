@@ -14,7 +14,7 @@
 
 ## 🎯 Introdução
 
-O Angular Router é um mecanismo poderoso para criar Aplicações de Página Única (SPAs) com múltiplas visualizações. Ele permite a navegação entre diferentes componentes enquanto mantém o estado da aplicação e fornece uma experiência de usuário superior.
+O Angular Router é um mecanismo poderoso para criar Aplicações de Página Única (SPAs) com múltiplas visualizações. Ele permite a navegação entre diferentes componentes enquanto mantém o estado da aplicação e fornece uma experiência melhor ao usuário.
 
 ## ⚙️ Configuração Básica
 
