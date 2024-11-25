@@ -6,7 +6,7 @@
 
 ## 📋 Índice
 
-- [Introdução](#introdução)
+- [Introdução](#-introdução)
 - [Conceitos Fundamentais](#conceitos-fundamentais)
 - [Configuração](#configuração)
 - [Form Controls](#form-controls)
