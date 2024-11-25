@@ -106,7 +106,6 @@ Este repositório é um acervo abrangente de conhecimento técnico, organizado e
 ## 📞 Contato
 
 **Email**: fabossif@gmail.com
-**Slack**: #knowledge-base-channel
 
 ---
 
