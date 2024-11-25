@@ -7,19 +7,19 @@
 ## 📋 Índice
 
 - [Introdução](#-introdução)
-- [Conceitos Fundamentais](#conceitos-fundamentais)
-- [Configuração](#configuração)
-- [Form Controls](#form-controls)
-- [Form Groups](#form-groups)
-- [Form Arrays](#form-arrays)
-- [Validação](#validação)
-- [Form Builders](#form-builders)
-- [Observables e Forms](#observables-e-forms)
-- [Casos de Uso Avançados](#casos-de-uso-avançados)
-- [Performance](#performance)
-- [Testes](#testes)
-- [Integração com Backend](#integração-com-backend)
-- [Melhores Práticas](#melhores-práticas)
+- [Conceitos Fundamentais](#-conceitos-fundamentais)
+- [Configuração](#-configuração)
+- [Form Controls](#-form-controls)
+- [Form Groups](#-form-groups)
+- [Form Arrays](#-form-arrays)
+- [Validação](#-validação)
+- [Form Builders](#-form-builders)
+- [Observables e Forms](#-observables-e-forms)
+- [Casos de Uso Avançados](#-casos-de-uso-avançados)
+- [Performance](#-performance)
+- [Testes](#-testes)
+- [Integração com Backend](#-integração-com-backend)
+- [Melhores Práticas](#-melhores-práticas)
 
 ## 🎯 Introdução
 
