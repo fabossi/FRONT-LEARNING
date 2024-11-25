@@ -98,14 +98,14 @@ Este repositório é um acervo abrangente de conhecimento técnico, organizado e
 
 ## 🚦 Próximos Passos
 
-- [ ] Expandir documentação de Backend
-- [ ] Adicionar mais exemplos práticos
-- [ ] Implementar guias de contribuição detalhados
-- [ ] Criar seção de cases de uso
+- [✅] Expandir documentação de Backend
+- [✅] Adicionar mais exemplos práticos
+- [✅] Implementar guias de contribuição detalhados
+- [✅] Criar seção de cases de uso
 
 ## 📞 Contato
 
-**Email**: dev@brainrocket.com
+**Email**: fabossif@gmail.com
 **Slack**: #knowledge-base-channel
 
 ---
