@@ -1,36 +1,386 @@
-# 🏗️ Princípios GRASP: Guia Completo de Design de Software
+# 🏗️ Princípios GRASP: Guia Prático de Design de Software com TypeScript
 
-## 📌 Princípios GRASP
+## 📌 Introdução aos Princípios GRASP
 
-### 🔍 O que são os Princípios GRASP?
+GRASP (General Responsibility Assignment Software Patterns) são padrões que nos ajudam a atribuir responsabilidades de forma inteligente em projetos orientados a objetos, promovendo um design de software mais flexível, manutenível e compreensível.
 
-GRASP (General Responsibility Assignment Software Patterns) são padrões para atribuição de responsabilidades em projetos orientados a objetos.
+## 🎯 Princípios Fundamentais com Exemplos
 
-### 🎯 Princípios Fundamentais
+### 1. 🕵️ Especialista na Informação (Information Expert)
 
-1. **Especialista na Informação** 🕵️
-   - Atribua responsabilidades a classes que têm as informações necessárias para realizar a tarefa. Este princípio sugere que um objeto deve ser responsável por realizar uma tarefa quando possui todas as informações necessárias para executá-la.
+#### Código Ruim (Violação do Princípio)
+```typescript
+class Order {
+  items: any[];
+  
+  calculateTotal(taxRate: number) {
+    // A classe Order não deveria calcular o total, 
+    // pois não possui todas as informações necessárias
+    let total = 0;
+    for (let item of this.items) {
+      total += item.price;
+    }
+    return total * (1 + taxRate);
+  }
+}
+```
 
-2. **Criador** 🏗️
-   - Defina quem deve criar novas instâncias de classes. O criador determina qual classe tem a responsabilidade de instanciar novos objetos, considerando critérios como composição, agregação ou uso próximo.
+#### Código Correto
+```typescript
+class Item {
+  constructor(
+    public name: string, 
+    public price: number
+  ) {}
 
-3. **Baixo Acoplamento** 🔗
-   - Minimize dependências entre componentes para criar um sistema mais flexível, fácil de manter e modificar. Componentes com baixo acoplamento são mais independentes uns dos outros.
+  calculateItemTotal(taxRate: number): number {
+    return this.price * (1 + taxRate);
+  }
+}
 
-4. **Alta Coesão** 🎯
-   - Mantenha responsabilidades fortemente relacionadas dentro de uma mesma classe ou módulo. Uma classe com alta coesão tem um propósito bem definido e concentrado.
+class Order {
+  constructor(public items: Item[]) {}
 
-5. **Controlador** 🎛️
-   - Gerencie eventos do sistema em classes específicas, representando um ponto de controle para fluxos de trabalho ou casos de uso do sistema.
+  calculateTotal(taxRate: number): number {
+    return this.items.reduce((total, item) => 
+      total + item.calculateItemTotal(taxRate), 0);
+  }
+}
+```
 
-6. **Polimorfismo** 🔄
-   - Use polimorfismo para lidar com variações de tipo, permitindo que diferentes classes implementem métodos de maneira específica, mas com uma interface comum.
+### 2. 🏗️ Criador (Creator)
 
-7. **Fabricação Pura** 🧩
-   - Crie classes artificiais quando necessário para manter a organização e a separação de responsabilidades, mesmo que essas classes não representem conceitos do domínio real.
+#### Código Ruim
+```typescript
+class User {
+  static createOrder(user: User) {
+    // Uma classe externa criando objetos de outra classe
+    return new Order(user);
+  }
+}
 
-8. **Indireção** ↔️
-   - Use intermediários para reduzir acoplamento entre componentes, criando uma camada adicional de abstração que facilita a comunicação e a flexibilidade.
+class Order {
+  constructor(public user: User) {}
+}
+```
 
-9. **Proteção contra Variações** 🛡️
-   - Encapsule o que varia para minimizar o impacto de mudanças no sistema, criando interfaces estáveis e isolando elementos que podem mudar frequentemente.
+#### Código Correto
+```typescript
+class User {
+  createOrder(): Order {
+    // A própria classe User cria sua instância de Order
+    return new Order(this);
+  }
+}
+
+class Order {
+  constructor(public user: User) {}
+}
+```
+
+### 3. 🔗 Baixo Acoplamento (Low Coupling)
+
+#### Código Ruim (Alto Acoplamento)
+```typescript
+class PaymentProcessor {
+  processPaypal(details: any) {
+    // Método fortemente acoplado a detalhes específicos do Paypal
+    const paypal = new PaypalGateway();
+    paypal.sendRequest(details);
+  }
+
+  processStripe(details: any) {
+    const stripe = new StripeGateway();
+    stripe.sendRequest(details);
+  }
+}
+```
+
+#### Código Correto
+```typescript
+interface PaymentGateway {
+  processPayment(amount: number): boolean;
+}
+
+class PaypalGateway implements PaymentGateway {
+  processPayment(amount: number): boolean {
+    // Implementação específica do Paypal
+    return true;
+  }
+}
+
+class StripeGateway implements PaymentGateway {
+  processPayment(amount: number): boolean {
+    // Implementação específica do Stripe
+    return true;
+  }
+}
+
+class PaymentProcessor {
+  constructor(private gateway: PaymentGateway) {}
+
+  processPayment(amount: number): boolean {
+    return this.gateway.processPayment(amount);
+  }
+}
+```
+
+### 4. 🎯 Alta Coesão (High Cohesion)
+
+#### Código Ruim (Baixa Coesão)
+```typescript
+class UserManager {
+  // Mistura responsabilidades de autenticação, validação, log e notificação
+  register(username: string, password: string) {
+    // Validação
+    if (username.length < 3) throw new Error('Invalid username');
+    
+    // Autenticação
+    const user = new User(username, password);
+    
+    // Logging
+    console.log(`User ${username} registered`);
+    
+    // Notificação
+    this.sendWelcomeEmail(user);
+  }
+}
+```
+
+#### Código Correto
+```typescript
+class UserValidator {
+  static validate(username: string): boolean {
+    return username.length >= 3;
+  }
+}
+
+class UserRegistration {
+  register(username: string, password: string): User {
+    if (!UserValidator.validate(username)) {
+      throw new Error('Invalid username');
+    }
+    return new User(username, password);
+  }
+}
+
+class UserLogger {
+  static log(username: string) {
+    console.log(`User ${username} registered`);
+  }
+}
+
+class UserNotification {
+  static sendWelcomeEmail(user: User) {
+    // Lógica de envio de e-mail
+  }
+}
+```
+
+### 5. 🎛️ Controlador (Controller)
+
+#### Código Ruim
+```typescript
+// Lógica de sistema espalhada em várias classes
+class ProductView {
+  onAddToCart() {
+    // Lógica de negócio misturada com interface
+    const product = this.selectedProduct;
+    const cart = new Cart();
+    cart.addItem(product);
+  }
+}
+```
+
+#### Código Correto
+```typescript
+class CartController {
+  constructor(
+    private cart: Cart, 
+    private inventoryService: InventoryService
+  ) {}
+
+  addToCart(product: Product): void {
+    if (this.inventoryService.checkAvailability(product)) {
+      this.cart.addItem(product);
+    }
+  }
+}
+
+class ProductView {
+  constructor(private cartController: CartController) {}
+
+  onAddToCart(product: Product) {
+    this.cartController.addToCart(product);
+  }
+}
+```
+
+### 6. 🔄 Polimorfismo (Polymorphism)
+
+#### Código Ruim
+```typescript
+class ReportGenerator {
+  generateReport(type: string, data: any) {
+    if (type === 'PDF') {
+      // Lógica específica para PDF
+    } else if (type === 'CSV') {
+      // Lógica específica para CSV
+    }
+  }
+}
+```
+
+#### Código Correto
+```typescript
+interface ReportGenerator {
+  generate(data: any): string;
+}
+
+class PDFReportGenerator implements ReportGenerator {
+  generate(data: any): string {
+    // Lógica específica para PDF
+    return 'PDF Report';
+  }
+}
+
+class CSVReportGenerator implements ReportGenerator {
+  generate(data: any): string {
+    // Lógica específica para CSV
+    return 'CSV Report';
+  }
+}
+
+class ReportService {
+  constructor(private generator: ReportGenerator) {}
+
+  createReport(data: any): string {
+    return this.generator.generate(data);
+  }
+}
+```
+
+### 7. 🧩 Fabricação Pura (Pure Fabrication)
+
+#### Código Ruim
+```typescript
+class Order {
+  // Sobrecarregando a classe Order com responsabilidades que não são suas
+  calculateTax(): number {
+    // Lógica de cálculo de imposto
+  }
+
+  sendEmailConfirmation(): void {
+    // Lógica de envio de e-mail
+  }
+}
+```
+
+#### Código Correto
+```typescript
+class TaxCalculator {
+  static calculateTax(order: Order): number {
+    // Classe artificial para cálculo de impostos
+    return order.total * 0.1;
+  }
+}
+
+class OrderNotification {
+  static sendConfirmation(order: Order): void {
+    // Classe artificial para envio de notificações
+  }
+}
+
+class Order {
+  // Mantém apenas responsabilidades essenciais
+}
+```
+
+### 8. ↔️ Indireção (Indirection)
+
+#### Código Ruim
+```typescript
+class ProductRepository {
+  saveProduct(product: Product) {
+    // Acoplamento direto com banco de dados
+    const database = new Database();
+    database.save(product);
+  }
+}
+```
+
+#### Código Correto
+```typescript
+interface DatabaseAdapter {
+  save(data: any): void;
+}
+
+class MySQLAdapter implements DatabaseAdapter {
+  save(data: any): void {
+    // Lógica específica do MySQL
+  }
+}
+
+class ProductRepository {
+  constructor(private database: DatabaseAdapter) {}
+
+  saveProduct(product: Product): void {
+    this.database.save(product);
+  }
+}
+```
+
+### 9. 🛡️ Proteção contra Variações (Protected Variations)
+
+#### Código Ruim
+```typescript
+class PaymentProcessor {
+  processPayment(method: string, amount: number) {
+    // Processamento de pagamento hardcoded
+    if (method === 'credit') {
+      // Lógica de cartão de crédito
+    } else if (method === 'debit') {
+      // Lógica de cartão de débito
+    }
+  }
+}
+```
+
+#### Código Correto
+```typescript
+interface PaymentStrategy {
+  process(amount: number): boolean;
+}
+
+class CreditCardPayment implements PaymentStrategy {
+  process(amount: number): boolean {
+    // Lógica específica de cartão de crédito
+    return true;
+  }
+}
+
+class DebitCardPayment implements PaymentStrategy {
+  process(amount: number): boolean {
+    // Lógica específica de cartão de débito
+    return true;
+  }
+}
+
+class PaymentProcessor {
+  constructor(private strategy: PaymentStrategy) {}
+
+  processPayment(amount: number): boolean {
+    return this.strategy.process(amount);
+  }
+}
+```
+
+## 🚀 Conclusão
+
+Os Princípios GRASP são ferramentas poderosas para criar designs de software mais robustos, flexíveis e manuteníveis. Ao aplicá-los consistentemente, você estará no caminho para criar sistemas de alta qualidade.
+
+**Dicas Finais:**
+- Não aplique todos os princípios de uma vez
+- Use bom senso e julgamento
+- Sempre refatore e melhore continuamente
+- Pratique, pratique, pratique!
