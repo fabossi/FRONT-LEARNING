@@ -203,23 +203,6 @@ select<Feature>
 - Evite estados profundos
 - Normalize dados complexos
 
-## 🚀 Começando
-
-### 1. Avalie suas necessidades:
-- Tamanho do projeto
-- Complexidade do estado
-- Experiência da equipe
-
-### 2. Escolha uma solução:
-- Comece simples (Services + RxJS)
-- Evolua conforme necessário
-- Considere a manutenção futura
-
-### 3. Implemente gradualmente:
-- Comece com um módulo
-- Refatore aos poucos
-- Mantenha consistência
-
 ## 📚 Recursos Adicionais
 
 ### 🔗 Links Úteis
@@ -227,13 +210,6 @@ select<Feature>
 - [NGXS Documentation](https://www.ngxs.io/)
 - [Akita Documentation](https://datorama.github.io/akita/)
 - [RxJS Documentation](https://rxjs.dev/)
-
-### 💡 Dicas Finais
-- Comece pequeno
-- Documente decisões
-- Mantenha consistência
-- Revise periodicamente
-
 
 Esta documentação fornece:
 - Visão geral clara do gerenciamento de estado
