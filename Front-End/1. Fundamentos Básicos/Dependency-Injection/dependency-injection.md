@@ -50,11 +50,7 @@ export class MeuComponente { }
 ## 🌳 Hierarquia de Injeção
 
 ### Processo de Resolução
-1. Verifica o Element Injector do componente atual
-2. Sobe na árvore de Element Injectors
-3. Volta ao ponto inicial
-4. Verifica o Module Injector
-5. Sobe na hierarquia de Module Injectors
+  * Imagem anexada nesta mesma pasta com a imagem da hierarquia
 
 ```typescript
 // Exemplo de hierarquia
