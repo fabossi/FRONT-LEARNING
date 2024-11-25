@@ -7,7 +7,7 @@
 
 ## 📋 Índice
 
-- [Introdução](#introdução)
+- [Introdução](##introdução)
 - [Casos de Uso](#casos-de-uso)
 - [Configuração Básica](#configuração-básica)
 - [Funcionalidades Básicas](#funcionalidades-básicas)
