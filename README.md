@@ -1,4 +1,4 @@
-# 🚀 Repositório de Conhecimento Tech - BrainRocket
+# 🚀 Repositório de Conhecimento Tech - Angular/Node.Js
 
 ## 🌟 Visão Geral
 
