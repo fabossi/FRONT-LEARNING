@@ -1,16 +1,16 @@
 # 🛣️ Guia Completo de Roteamento Angular
 
 ## 📋 Índice
-- [Introdução](#introdução)
-- [Configuração Básica](#configuração-básica)
-- [Componentes do Router](#componentes-do-router)
-- [Rotas Dinâmicas](#rotas-dinâmicas)
-- [Parâmetros de Consulta](#parâmetros-de-consulta)
-- [Rotas Aninhadas](#rotas-aninhadas)
-- [Routes Guard](#guardas-de-rota)
-- [Lazy Loading](#carregamento-preguiçoso)
-- [Route Resolver](#resolvedores-de-rota)
-- [Navegação](#navegação)
+- [Introdução](#-introdução)
+- [Configuração Básica](#-configuração-básica)
+- [Componentes do Router](#-componentes-do-router)
+- [Rotas Dinâmicas](#-rotas-dinâmicas)
+- [Parâmetros de Consulta](#-parâmetros-de-consulta)
+- [Rotas Aninhadas](#-rotas-aninhadas)
+- [Routes Guard](#-guardas-de-rota)
+- [Lazy Loading](#-carregamento-preguiçoso)
+- [Route Resolver](#-resolvedores-de-rota)
+- [Navegação](#-navegação)
 
 ## 🎯 Introdução
 
