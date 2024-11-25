@@ -1,5 +1,3 @@
-Módulo 2: Princípios SOLID e Padrões de Projeto
-
 ## 📌 SOLID
 
 SOLID é um acrônimo criado por Robert C. Martin (Uncle Bob) que representa cinco princípios fundamentais da programação orientada a objetos.
