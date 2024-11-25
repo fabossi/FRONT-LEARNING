@@ -48,11 +48,24 @@ class ServicoNotificacao {
 }
 ```
 
-#### 2️⃣ Open/Closed Principle (OCP) 🔓
+### 2️⃣ Open/Closed Principle (OCP) 🔓
 **Conceito:** Classes devem ser abertas para extensão, mas fechadas para modificação.
 
 **Exemplo Prático:**
 ```typescript
+// ❌ Violando OCP: Modificando a classe para cada novo tipo de desconto
+class Desconto {
+  calcular(valor: number, tipoDesconto: string): number {
+    if (tipoDesconto === 'padrao') {
+      return valor * 0.9; // 10% de desconto
+    } else if (tipoDesconto === 'blackFriday') {
+      return valor * 0.5; // 50% de desconto
+    }
+    return valor;
+  }
+}
+
+// ✅ Respeitando OCP: Usando polimorfismo para estender comportamentos
 interface Desconto {
   calcular(valor: number): number;
 }
@@ -68,75 +81,170 @@ class DescontoBlackFriday implements Desconto {
     return valor * 0.5; // 50% de desconto
   }
 }
+
+class Carrinho {
+  aplicarDesconto(valor: number, desconto: Desconto) {
+    return desconto.calcular(valor);
+  }
+}
 ```
 
-#### 3️⃣ Liskov Substitution Principle (LSP) 🔄
+### 3️⃣ Liskov Substitution Principle (LSP) 🔄
 **Conceito:** Objetos de uma classe pai devem ser substituíveis por objetos de suas classes filhas sem quebrar a aplicação.
 
 **Exemplo Prático:**
 ```typescript
-interface FormaGeometrica {
-  calcularArea(): number;
-}
+// ❌ Violando LSP: Subclasse altera o comportamento de forma inesperada
+class Retangulo {
+  protected largura: number;
+  protected altura: number;
 
-class Retangulo implements FormaGeometrica {
-  calcularArea() {
+  definirDimensoes(largura: number, altura: number) {
+    this.largura = largura;
+    this.altura = altura;
+  }
+
+  calcularArea(): number {
     return this.largura * this.altura;
   }
 }
 
-class Quadrado implements FormaGeometrica {
-  calcularArea() {
+class Quadrado extends Retangulo {
+  definirDimensoes(lado: number) {
+    this.largura = lado;
+    this.altura = lado;
+  }
+
+  // Comportamento diferente do pai, potencialmente quebrando código
+}
+
+// ✅ Respeitando LSP: Usando composição e interfaces
+interface Forma {
+  calcularArea(): number;
+}
+
+class Retangulo implements Forma {
+  constructor(
+    private largura: number, 
+    private altura: number
+  ) {}
+
+  calcularArea(): number {
+    return this.largura * this.altura;
+  }
+}
+
+class Quadrado implements Forma {
+  constructor(private lado: number) {}
+
+  calcularArea(): number {
     return this.lado * this.lado;
   }
 }
 ```
 
-#### 4️⃣ Interface Segregation Principle (ISP) 🧩
+### 4️⃣ Interface Segregation Principle (ISP) 🧩
 **Conceito:** Clientes não devem ser forçados a depender de interfaces que não usam.
 
 **Exemplo Prático:**
 ```typescript
+// ❌ Violando ISP: Interface grande e com responsabilidades múltiplas
 interface Trabalhador {
   trabalhar(): void;
+  comer(): void;
+  dormir(): void;
+  programar(): void;
+}
+
+class Humano implements Trabalhador {
+  trabalhar() { /* Trabalhar */ }
+  comer() { /* Comer */ }
+  dormir() { /* Dormir */ }
+  programar() { /* Programar */ }
+}
+
+class Robo implements Trabalhador {
+  trabalhar() { /* Trabalhar */ }
+  comer() { throw new Error("Robôs não comem!"); }
+  dormir() { throw new Error("Robôs não dormem!"); }
+  programar() { /* Programar */ }
+}
+
+// ✅ Respeitando ISP: Interfaces menores e específicas
+interface Trabalhavel {
+  trabalhar(): void;
+}
+
+interface Programavel {
+  programar(): void;
 }
 
 interface Alimentavel {
   comer(): void;
 }
 
-class Humano implements Trabalhador, Alimentavel {
-  trabalhar() { /* Trabalhar */ }
-  comer() { /* Comer */ }
+interface Dormivel {
+  dormir(): void;
 }
 
-class Robo implements Trabalhador {
+class Humano implements Trabalhavel, Programavel, Alimentavel, Dormivel {
   trabalhar() { /* Trabalhar */ }
+  programar() { /* Programar */ }
+  comer() { /* Comer */ }
+  dormir() { /* Dormir */ }
+}
+
+class Robo implements Trabalhavel, Programavel {
+  trabalhar() { /* Trabalhar */ }
+  programar() { /* Programar */ }
 }
 ```
 
-#### 5️⃣ Dependency Inversion Principle (DIP) 🔀
+### 5️⃣ Dependency Inversion Principle (DIP) 🔀
 **Conceito:** Dependa de abstrações, não de implementações concretas.
 
 **Exemplo Prático:**
 ```typescript
-interface Repositorio {
-  salvar(dados: any): void;
+// ❌ Violando DIP: Dependência direta de implementações concretas
+class ServicoNotificacao {
+  private emailService = new ServicoEmail();
+  private smsService = new ServicoSMS();
+
+  notificarPorEmail(mensagem: string) {
+    this.emailService.enviar(mensagem);
+  }
+
+  notificarPorSMS(mensagem: string) {
+    this.smsService.enviar(mensagem);
+  }
 }
 
-class RepositorioMySQL implements Repositorio {
-  salvar(dados: any) { /* Salvar no MySQL */ }
+class ServicoEmail {
+  enviar(mensagem: string) { /* Enviar email */ }
 }
 
-class RepositorioMongoDB implements Repositorio {
-  salvar(dados: any) { /* Salvar no MongoDB */ }
+class ServicoSMS {
+  enviar(mensagem: string) { /* Enviar SMS */ }
 }
 
-class ServicoUsuario {
-  constructor(private repositorio: Repositorio) {}
-  
-  salvarUsuario(usuario: any) {
-    this.repositorio.salvar(usuario);
+// ✅ Respeitando DIP: Dependendo de abstrações
+interface ServicoNotificacao {
+  enviar(mensagem: string): void;
+}
+
+class ServicoEmail implements ServicoNotificacao {
+  enviar(mensagem: string) { /* Enviar email */ }
+}
+
+class ServicoSMS implements ServicoNotificacao {
+  enviar(mensagem: string) { /* Enviar SMS */ }
+}
+
+class Notificador {
+  constructor(private servicoNotificacao: ServicoNotificacao) {}
+
+  notificar(mensagem: string) {
+    this.servicoNotificacao.enviar(mensagem);
   }
 }
 ```
