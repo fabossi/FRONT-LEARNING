@@ -1,4 +1,4 @@
-# 🏗️ Princípios GRASP: Guia Prático de Design de Software com TypeScript
+# 🏗️ Princípios GRASP: Guia Prático de Design de Software
 
 ## 📌 Introdução aos Princípios GRASP
 
