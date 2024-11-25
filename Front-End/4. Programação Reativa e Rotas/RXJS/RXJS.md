@@ -1,14 +1,14 @@
 # 🔄 Guia Completo de Operadores RxJS
 
 ## 📋 Sumário
-- [Introdução](#introdução)
-- [Categorias de Operadores](#categorias-de-operadores)
-  - [Operadores de Criação](#operadores-de-criação)
-  - [Operadores de Transformação](#operadores-de-transformação)
-  - [Operadores de Filtragem](#operadores-de-filtragem)
-  - [Operadores de Combinação](#operadores-de-combinação)
-  - [Operadores de Tratamento de Erro](#operadores-de-tratamento-de-erro)
-  - [Operadores Utilitários](#operadores-utilitários)
+- [Introdução](#-introdução)
+- [Categorias de Operadores](#-categorias-de-operadores)
+  - [Operadores de Criação](#-operadores-de-criação)
+  - [Operadores de Transformação](#-operadores-de-transformação)
+  - [Operadores de Filtragem](#-operadores-de-filtragem)
+  - [Operadores de Combinação](#-operadores-de-combinação)
+  - [Operadores de Tratamento de Erro](#-operadores-de-tratamento-de-erro)
+  - [Operadores Utilitários](#-operadores-utilitários)
 
 ## 📝 Introdução
 
