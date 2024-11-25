@@ -1,4 +1,4 @@
-# 🏗️ Princípios SOLID e GRASP: Guia Completo de Design de Software
+# 🏗️ Princípios SOLID: Guia Completo de Design de Software
 
 ## 📌 Princípios SOLID
 
