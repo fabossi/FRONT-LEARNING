@@ -1,4 +1,4 @@
-# 🚀 Conhecimento Tech - Angular & Node.Js
+# 🚀 Conhecimento Tech - Angular / Node.Js & CI/D (Gitlab)
 
 ## 🌟 Visão Geral
 
