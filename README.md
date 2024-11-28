@@ -10,7 +10,6 @@ Este repositório é um acervo abrangente de conhecimento técnico, organizado e
 
 1. **Front-End** 💻
 2. **Back-End** 🖥️
-3. **BrainRocket-About** 🧠
 
 ## 🔍 Detalhamento das Pastas
 
