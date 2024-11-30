@@ -41,7 +41,7 @@ export class ExampleComponent {
 }
 ```
 
-
+```mermaid
 flowchart TD
     A[Início da Aplicação] --> B[Criação da Instância do Serviço]
     B --> C{Tipo de Injeção}
@@ -49,7 +49,7 @@ flowchart TD
     C -->|@Self| E[Instância Específica do Componente]
     D --> F[Morre com a Aplicação]
     E --> G[Morre com o Componente]
-
+```
 
 ## 🔍 Controle de Memory Leak
 
