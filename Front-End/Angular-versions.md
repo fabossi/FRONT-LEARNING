@@ -475,5 +475,4 @@ src/
 
 ---
 
-*Autor: [Seu Nome]*  
 *Última atualização: Novembro 2024*
