@@ -101,21 +101,12 @@ export class StateService {
 - Ótimo para aplicações grandes
 - Ferramentas de debug poderosas
 
+## 🔄 NgRx Data Flow
+
+### Architecture Overview
+
 ```mermaid
-graph LR
-    A[Component] -->|1. Dispatch Action| B[Store]
-    B -->|2. Reducer| C[State]
-    C -->|3. Selector| A
-    B -->|4. Effect| D[Service]
-    D -->|5. Action| B
-    style A fill:#bbf,stroke:#333,stroke-width:2px
-    style B fill:#f96,stroke:#333,stroke-width:4px
-    style C fill:#9f6,stroke:#333,stroke-width:2px
-    style D fill:#ff9,stroke:#333,stroke-width:2px
-
-```
-
-```flowchart TD
+flowchart TD
     A[Componente] -->|Dispatches| B[Action]
     B -->|Triggers| C[Effects]
     C -->|Updates| D[Reducer]
@@ -123,7 +114,6 @@ graph LR
     E -->|Selects| F[Selector]
     F -->|Returns Data| A
 ```
-
 
 ### 3. 🟢 NGXS
 **Prós:**
