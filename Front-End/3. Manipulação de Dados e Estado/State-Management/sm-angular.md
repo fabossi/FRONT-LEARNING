@@ -115,6 +115,16 @@ graph LR
 
 ```
 
+```flowchart TD
+    A[Componente] -->|Dispatches| B[Action]
+    B -->|Triggers| C[Effects]
+    C -->|Updates| D[Reducer]
+    D -->|Modifies| E[Store]
+    E -->|Selects| F[Selector]
+    F -->|Returns Data| A
+```
+
+
 ### 3. 🟢 NGXS
 **Prós:**
 - Sintaxe mais simples que NgRx
