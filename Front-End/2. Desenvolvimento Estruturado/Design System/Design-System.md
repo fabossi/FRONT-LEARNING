@@ -1,4 +1,4 @@
-# 🎨 Design System: Guia Definitivo para Front-Ends Seniores
+# 🎨 Design System: Guia Definitivo
 
 ## 📌 Índice
 - [Fundamentos](#fundamentos)
