@@ -86,23 +86,23 @@ feature/
   ```
 
 ### ✨ Boas Práticas
-- 🎯 Métodos com responsabilidade única
-- 📏 Máximo 400 linhas por arquivo
-- 🔍 Máximo 3 níveis de indentação
-- 🚫 Evitar else após return
-- 🔄 RxJS: 
+- Métodos com responsabilidade única
+- Máximo 400 linhas por arquivo
+- Máximo 3 níveis de indentação
+- Evitar else após return
+- RxJS: 
   - `pipe` para transformações
   - `takeUntil` para unsubscribe
   - `catchError` para tratamento de erros
 
 ### 📝 Nomenclatura
-- 🧩 Componentes: `feature.component.ts`
-- ⚙️ Serviços: `feature.service.ts`
-- 📋 Interfaces: `IFeature` ou `Feature`
-- 📊 Enums: `FeatureType`
-- 🔄 Observables: sufixo `$`
-- 🛠️ Métodos: verbo + substantivo
-- 🔒 Private properties: prefixo `_`
+- Componentes: `feature.component.ts`
+- Serviços: `feature.service.ts`
+- Interfaces: `IFeature` ou `Feature`
+- Enums: `FeatureType`
+- Observables: sufixo `$`
+- Métodos: verbo + substantivo
+- Private properties: prefixo `_`
 
 ## 🔧 Padrões TypeScript
 ```typescript
