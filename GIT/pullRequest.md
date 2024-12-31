@@ -4,11 +4,11 @@
 
 ### 📦 Imports
 - Ordem de imports:
-  1. 🅰️ Angular core
-  2. 📱 Angular modules
-  3. 🔌 Third-party libraries
-  4. 📂 Local modules
-  5. 🧩 Components/Services/etc
+  1. Angular core
+  2. Angular modules
+  3. Third-party libraries
+  4. Local modules
+  5. Components/Services/etc
 - Linha em branco entre grupos de imports
 - ⚠️ Evitar imports com `*`
 
@@ -51,34 +51,34 @@ feature/
   ```typescript
   @Component({...})
   export class FeatureComponent implements OnInit, OnDestroy {
-    // 1. 🎯 Decorators
+    // 1. Decorators
     @Input() data: Data;
     
-    // 2. 🌐 Propriedades públicas
+    // 2. Propriedades públicas
     isLoading = false;
     
-    // 3. 🔒 Propriedades privadas
+    // 3. Propriedades privadas
     private destroy$ = new Subject<void>();
     
-    // 4. 🔄 Getters/Setters
+    // 4. Getters/Setters
     get isValid(): boolean {
       return this.form.valid;
     }
     
-    // 5. 🏗️ Constructor
+    // 5. Constructor
     constructor(private service: Service) {}
     
-    // 6. 🔄 Lifecycle hooks
+    // 6. Lifecycle hooks
     ngOnInit(): void {
       this.initialize();
     }
     
-    // 7. 🛠️ Métodos públicos
+    // 7. Métodos públicos
     submit(): void {
       // lógica
     }
     
-    // 8. 🔐 Métodos privados
+    // 8. Métodos privados
     private initialize(): void {
       // lógica
     }
