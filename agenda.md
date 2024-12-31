@@ -233,8 +233,6 @@
 4. **Prepare-se para o Contexto**
    - Estude sobre a cultura de Chipre
    - Prepare-se para entrevista em inglês
-   - Pesquise sobre a BrainRocket
-
 ---
 ⭐ **Lembre-se**: Qualidade > Quantidade. Foque em entender bem os conceitos fundamentais antes de avançar.
 
